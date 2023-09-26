@@ -1,0 +1,36 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+<h2 class="text-center">INTRESTED ITEMS</h2>
+<table class="table text-center align-middle" style="border-collapse:separate;border-spacing:0 10px;">
+    <tr>
+
+    </tr>
+
+    {% for i in liked %}
+    <tr style="background-color:#e9f8f1;" class="border border-success">
+            {% if i.products.image1 %}
+        <td style=" border-radius:10px 0px 0px 10px;"><img src="{{i.products.image1.url}}"  alt="..." height="80px" width="80px"></td>
+            {% else %}
+        <td><img src="" class="card-img-top"  alt="..." height="250px"></td>
+            {% endif %}
+       <td>{{i.products.name}}</td>
+        <td>{{i.products.price}}</td>
+
+        <td><a href="{% url 'shop:item_details' i.products.id %}" class="btn btn-primary btn-md">view</a></td>
+
+        <td style=" border-radius:0px 10px 10px 0px;"><a href="{% url 'cart:like' i.products.id %}" ><i style="font-size:30px;" class="bi bi-heart-fill text-danger"></i></a></td>
+
+    </tr>
+    {% empty %}
+        <h5 class="text-center text-danger">NOTHING TO SHOW</h5>
+    {% endfor %}
+</table>
+
+
+
+{% endblock%}

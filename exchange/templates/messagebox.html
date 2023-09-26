@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<style>
+.i{width:100%;border-radius:20px;}
+.i:focus {box-shadow:none; border-color:green }
+</style>
+
+<div style="background-color:green;color:white" class="p-3 ">
+    {% if item %}
+        <a href="{% url 'shop:item_details' item.id %}" class="me-3" style="text-decoration:none;color:white">
+            <i class="bi bi-arrow-left" style="font-size:20px;"></i>
+        </a>
+     {% else %}
+          <a href="{% url 'chats:yourchats' %}" class="me-3" style="text-decoration:none;color:white">
+              <i class="bi bi-arrow-left" style="font-size:20px;"></i>
+          </a>
+     {% endif %}
+<!--    <a href="{{request.META.HTTP_REFERER}}" class="me-3" style="text-decoration:none;color:white">-->
+    
+    <h4 style="text-transform:uppercase;display:inline">{{ r.username }}</h4>
+</div>
+
+
+<div style="overflow:auto;height:72vh;background-color:#e4e3e3" class="pt-3" id="mb">
+{% for i in m %}
+    {% if request.user == i.sender %}
+        <div class="mx-2">
+            <div style="background-color:#f0f9e4;width:fit-content;border-radius:15px;margin-left:auto">
+               <p class="p-1 px-3">{{i.content}}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="mx-2">
+            <div style="background-color:white;width:fit-content;border-radius:15px;">
+               <p  class="p-1 px-3">{{i.content}}</p>
+            </div>
+        </div>
+    {% endif %}
+        {% empty %}
+            <p>no message</p>
+        {% endfor %}
+
+</div>
+<div>
+   <form method="POST" class="form form-center" style="width:100%">
+    {% csrf_token %}
+    <div class="" style="position:fixed;bottom:10px;width:95%">
+        <input type="submit" class="btn btn-success" value="send" style="float:right;border-radius:20px" id="sb">
+<div style="padding-right: .5em;overflow:hidden;">
+        <input type="text" class="form-control i" style="" name="msg" placeholder="Enter msg..." id="mi">
+</div>
+    </div>
+</form>
+</div>
+
+
+<script>
+    var ch=document.getElementById("mb");
+    ch.scrollTop=ch.scrollHeight
+</script>
+
+{% endblock%}

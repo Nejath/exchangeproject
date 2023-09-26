@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-fluid">
+
+    <div>
+    <h1 class="text-center">{{c.name | upper}}</h1>
+
+    </div><br>
+    <div class="container-fluid" style="margin-bottom:100px;">
+    <div class="row "><br><br>
+        {%for i in p %}
+         <div class=" col-md-2 p-3" style="">
+            <a href="{% url 'shop:item_details' i.id %}" style="text-decoration:none;color:black">
+            <div class="card" style="height:300px;">
+                {% if i.image1 %}
+                <img src="{{i.image1.url}}" class="card-img-top"  alt="..." height="200px">
+                {% else %}
+                <img src="" class="card-img-top"  alt="..." height="200px">
+                {% endif %}
+                <div class="card-body" style="position:relative">
+                 <h5 class="card-title" style="text-transform:uppercase;">{{i.name| truncatechars:20}}</h5>
+                 <strong><p class="card-text">PRICE:<span class="text-primary">{{i.price}}</span></p></strong>
+                    <div style="display:flex;justify-content:center;align-items:center;">
+
+                    </div>
+                </div>
+            </div></a>
+        </div>
+        {% endfor %}
+    </div></div>
+</div>
+
+{% endblock %}

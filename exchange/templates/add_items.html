@@ -1,0 +1,18 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block stylecontent %}
+<link rel="stylesheet" href="{% static 'css/productform.css' %}">
+{% endblock %}
+{% block content%}
+<h1>ADD YOUR ITEMS</h1>
+<form method="POST" enctype="multipart/form-data" class="f">
+    {% csrf_token %}
+<table>
+    {{form.as_p}}
+</table>
+<!--    <a href="javascript:history.go(-1);" class="btn btn-secondary me-3">cancel</a>-->
+<input type="submit" class="btn btn-success">
+</form>
+{% endblock%}

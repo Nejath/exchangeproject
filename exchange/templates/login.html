@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<style>
+    .form-control:focus {box-shadow:0 0 0 0.25rem #149d5d69 !important;}
+    .form {background-color: #e9f8f1; !important;border-radius: 10px;border: 2px solid black;}
+</style>
+
+<h2>log in</h2>
+<div align="center">
+<form method="POST" enctype="multipart/form-data" class="form form-center p-2 " style="width:400px">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" name="u" placeholder="Enter Username">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="p" placeholder="Enter password">
+    </div>
+    <div class="mb-3">
+        <center><input type="submit" class="btn btn-success" value="login"></center>
+    </div>
+   {% if messages %}
+    {% for i in messages%}
+    <ul class="messages">
+        <li>{{i}}</li>
+    </ul>
+    {%endfor%}
+    {% endif%}
+  <div class="mb-3">
+        <center><a class="" href="{% url 'user:register' %}">create account</a></center>
+  </div>
+</form>
+
+
+</div>
+{% endblock%}

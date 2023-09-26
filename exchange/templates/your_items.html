@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<h2 class="text-center">YOUR ITEMS</h2>
+<table class="table text-center align-middle" style="border-collapse:separate;border-spacing:0 10px;">
+
+    {% for i in items %}
+
+    <tr style="background-color:#e9f8f1;" class="border border-success">
+            {% if i.image1 %}
+        <td style=" border-radius:10px 0px 0px 10px;"><img src="{{i.image1.url}}"  alt="..." height="80px" width="80px"></td>
+            {% else %}
+        <td><img src="" class="card-img-top"  alt="..." height="250px"></td>
+            {% endif %}
+       <td><b>{{i.name | upper}}</b></td>
+        <td>{{i.price}}</td>
+
+        <td><a href="{% url 'shop:item_details' i.id %}" class="btn btn-primary btn-md">view</a></td>
+        <td><a href="{% url 'shop:update_your_item' i.id%}" class="btn btn-warning btn-md">update</a></td>
+        <td style=" border-radius:0px 10px 10px 0px;">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">remove</button>
+        </td>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content" style="border-radius:10px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Alert...!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to delete '{{i.name | upper}}'
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'shop:remove_your_item' i.id%}" class="btn btn-danger btn-md">remove</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    </tr>
+     {% empty %}
+        <h5 class="text-center text-danger">NO ITEMS</h5>
+
+    {% endfor %}
+</table>
+
+
+
+{% endblock%}

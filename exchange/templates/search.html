@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style="margin-bottom:100px;" ></div>
+
+<div><h4 class="text-center">You have searched for <span class="text-success">'{{query}}'</span></h4></div>
+  <div CLASS="container text-center">
+      <h6>SEARCH RESULTS</h6>
+</div>
+<div class="container">
+    <div class="row gy-3"><br><br>
+        {%for i in result %}
+
+        <div class=" col col-xs-6 col-sm-4 col-md-3 col-lg-2" style="">
+            <a href="{% url 'shop:item_details' i.id %}" style="text-decoration:none;color:black">
+            <div class="card" style="height:;">
+                {% if i.image1 %}
+                <img src="{{i.image1.url}}" class="card-img-top"  alt="..." height="200px">
+                {% else %}
+                <img src="" class="card-img-top"  alt="..." height="200px">
+                {% endif %}
+                <div class="card-body" style="position:relative">
+                 <h5 class="card-title" style="text-transform:uppercase;">{{i.name| truncatechars:20}}</h5>
+                 <strong><p class="card-text">PRICE:<span class="text-primary">{{i.price}}</span></p></strong>
+                    <div style="display:flex;justify-content:center;align-items:center;">
+
+                    </div>
+                </div>
+            </div></a>
+        </div>
+        {% empty %}
+        <h5 class="text-center text-danger">0 Results FOUND</h5>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+  .f {
+    background-color: #e9f8f1;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    margin: auto;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"],input[type="number"],input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  input[type="textarea"]{
+  cols:80% !important;
+  rows:5 !important;
+  }

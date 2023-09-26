@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<h1>DETAILS</h1>
+
+<div class="container" style="margin-bottom:100px;">
+    <div class="row">
+        <div class=" col-md-6 mt-5">
+
+<div id="carouselExampleIndicators" class="carousel carousel-dark slide p-5 " data-bs-interval="false">
+  <div class="carousel-indicators">
+
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"  aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+  </div>
+  <div class="carousel-inner">
+    {% for i in l %}
+    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}" style="">
+      <img src="{{ i.url }}" class="d-block" alt="..." width="100%" style="aspect-ratio:1/1">
+    </div>
+      {% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+        </div>
+        <div class=" col-md-6 bg-light mt-5 ">
+            <h2 class="card-title" style="text-transform:uppercase;"><b>{{d.name}}</b></h2><br>
+            <h3>PRICE:<span class="text-primary">{{d.price}}</span></h3>
+            <h3>DESCRIPTION:</h3>
+            <p style="text-align:justify">{{d.description|default:'nothing to show'}}</p>
+            <h3>PLACE:</h3>
+            <p style="text-align:justify">{{d.address}}</p>
+            <h3>SELLER NAME:</h3>
+            <p style="text-align:justify">{{d.user.username | upper}}</p>
+            <h3>PHONE NUMBER:</h3>
+            <p style="text-align:justify">{{d.phone}}</p>
+                {% if user != d.user %}
+                 <a href="{% url 'chats:messagebox' d.user.id  d.id %}" class="btn btn-success mb-2 me-3">CHAT WITH SELLER</a>
+
+                    <a href="{% url 'cart:like' d.id %}" >
+                    {% if like %}
+                    <i style="font-size:25px;" class="bi bi-heart-fill text-danger"></i>
+                    {% else %}
+                    <i style="font-size:25px;" class="bi bi-heart text-dark"></i>
+                    {% endif %}
+                    </a>
+                {% endif %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

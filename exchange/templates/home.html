@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylecontent %}
+<link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+{% endblock %}
+{% block content %}
+
+<div class="scrollmenu" style="display:flex;justify-content:space-between">
+  <a href="{% url 'shop:category_products' links.0.slug %}"><i style="font-size:20px;" class="fa-solid fa-car"></i><br>AUTOS</a>
+  <a href="{% url 'shop:category_products' links.1.slug %}"><i style="font-size:20px;" class="fa-solid fa-house"></i><br>PROPERTIES</a>
+  <a href="{% url 'shop:category_products' links.2.slug %}"><i style="font-size:20px;" class="fa-solid fa-display"></i><br>ELECTRONICS & APPLIANCES</a>
+  <a href="{% url 'shop:category_products' links.3.slug %}"><i style="font-size:20px;" class="fa-solid fa-couch"></i><br>FURNITURE</a>
+  <a href="{% url 'shop:category_products' links.4.slug %}"><i style="font-size:20px;" class="fa-solid fa-shirt"></i><br>FASHION</a>
+  <a href="{% url 'shop:category_products' links.5.slug %}"><i style="font-size:20px;" class="fa-solid fa-futbol"></i><br>BOOKS & SPORTS</a>
+
+</div>
+
+
+<div class="container-fluid" style="margin-bottom:100px;" >
+
+</div>
+
+<div class="container">
+    <div class="row gy-3"><br><br>
+        {%for i in items %}
+
+        <div class="col col-xs-6 col-sm-4 col-md-3 col-lg-2" >
+            <div class="">
+            <a href="{% url 'shop:item_details' i.id %}" style="text-decoration:none;color:black">
+            <div class="card" style="height:45vh">
+                {% if i.image1 %}
+                <img src="{{i.image1.url}}" class="card-img-top"  alt="..." height="180px" >
+                {% else %}
+                <img src="" class="card-img-top"  alt="..." height="180px">
+                {% endif %}
+                <div class="card-body " >
+                 <h5 class="card-title" style="text-transform:uppercase">{{i.name | truncatechars:20 }}</h5>
+                 <strong><p class="card-text ">PRICE:<span class="text-primary">{{i.price}}</span></p></strong>
+
+                </div>
+            </div></a></div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

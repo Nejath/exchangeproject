@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block stylecontent %}
+<link rel="stylesheet" href="{% static 'css/productform.css' %}">
+{% endblock %}
+
+{% block content%}
+
+<h1>UPDATE PROFILE</h1>
+<form method="POST" class="f mb-3">
+    {% csrf_token %}
+    <div>
+    {% for field in form %}
+<div>
+    <label>{{field.label}}</label>
+    {{field}}
+</div>
+    {% endfor %}
+    </div>
+     <a href="{{request.META.HTTP_REFERER}}" class="btn btn-secondary me-3">cancel</a>
+<input type="submit" class="btn btn-success">
+</form>
+{% endblock%}

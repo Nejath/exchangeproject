@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<h2 class="text-center">YOUR CHATS</h2>
+<div class="align-middle" style="">
+
+    {% for i in c %}
+    {% for j in i.participants.all %}
+    {% if j != request.user%}
+<a href="{% url 'chats:messagebox' j.id %}" style="text-decoration:none;color:black">
+    <div style="background-color:#e9f8f1;display:flex;border-radius:10px" class="border border-success m-3 p-2">
+
+        <div style="">
+            <b>{{j.username | upper}}</b>
+            <p class="ps-2">{{i.latest_message.content}}</p>
+        </div>
+        <div style="margin-left:auto;" class="d-flex align-items-center">
+            {{i.latest_message.timestamp | timesince }}&nbsp;ago
+        {% if i.notification == True %}
+         {% if i.latest_message.sender != request.user %}
+            &nbsp;&nbsp;<i style="font-size:20px;" class="bi bi-exclamation-circle-fill text-success"></i>
+        {% endif %}
+        {% endif %}
+
+        </div>
+
+    </div>
+</a>
+    {% endif %}
+    {% endfor%}
+     {% empty %}
+        <h5 class="text-center text-danger">NO CONVERSATIONS</h5>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+
