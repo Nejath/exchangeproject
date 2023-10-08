@@ -13,7 +13,8 @@
 <div>
     {{form.as_p}}
 </div>
-    <button onclick="javascript:history.go(-1);" class="btn btn-secondary me-3">cancel</button>
+<!--    <button onclick="javascript:history.go(-1);" class="btn btn-secondary me-3">cancel</button>-->
+    <a href="{% url 'shop:your_items'%}" class="btn btn-secondary me-3">cancel</a>
 <input type="submit" class="btn btn-success">
 </form>
 {% endblock%}

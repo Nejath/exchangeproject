@@ -14,12 +14,18 @@
             <b>{{j.username | upper}}</b>
             <p class="ps-2">{{i.latest_message.content}}</p>
         </div>
-        <div style="margin-left:auto;" class="d-flex align-items-center">
-            {{i.latest_message.timestamp | timesince }}&nbsp;ago
+        <div style="margin-left:auto;" class="text-end">
+            {{i.latest_message.timestamp | timesince }}&nbsp;ago<br>
         {% if i.notification == True %}
-         {% if i.latest_message.sender != request.user %}
-            &nbsp;&nbsp;<i style="font-size:20px;" class="bi bi-exclamation-circle-fill text-success"></i>
-        {% endif %}
+            {% if i.latest_message.sender != request.user %}
+            <i style="font-size:20px;" class="bi bi-exclamation-circle-fill text-success"></i>
+            {% else %}
+                <i style="color:grey">Delivered</i>
+            {% endif %}
+        {% else %}
+            {% if i.latest_message.sender == request.user %}
+                <i style="color:blue">Read</i>
+            {% endif %}
         {% endif %}
 
         </div>

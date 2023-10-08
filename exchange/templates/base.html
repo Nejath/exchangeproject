@@ -21,13 +21,13 @@
 
 
 </head>
-<body>
+<body style="">
 <div class="container-fluid">
 
 <header class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{% url 'shop:home' %}">
         <img src="{% static 'img/elogo.jpg' %}" alt="img" height="30px" width="30px" class="d-inline-block align-text-top">
         </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             All Categories
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="border-top:solid 2px green">
               {% for i in links %}
             <li><a class="dropdown-item" href="{% url 'shop:category_products' i.slug %}">{{i.name}}</a></li>
               {% endfor %}
@@ -64,7 +64,7 @@
                     <a class="nav-link"  href="{% url 'cart:likedview' %}">intrested</a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link"  href="{% url 'chats:yourchats' %}">messages
+                    <a class="nav-link"  href="{% url 'chats:yourchats' %}">Chats
                       {% if n == True %}
                         <i style="font-size:15px;" class="fa-solid fa-bell fa-beat-fade text-success"></i>
                       {% endif%}
@@ -103,7 +103,13 @@
     {% endblock %}
 
 
-
+<div>
+    {% block footer %}
+    <footer class="footer">
+        <p>All rights reserved <i class="fa-regular fa-copyright"></i> 2006-2023 EXCHANGE</p>
+    </footer>
+    {% endblock %}
+</div>
 
 </div>
 </body>

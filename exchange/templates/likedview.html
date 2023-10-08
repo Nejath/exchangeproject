@@ -19,7 +19,7 @@
         <td><img src="" class="card-img-top"  alt="..." height="250px"></td>
             {% endif %}
        <td>{{i.products.name}}</td>
-        <td>{{i.products.price}}</td>
+        <td>${{i.products.price}}</td>
 
         <td><a href="{% url 'shop:item_details' i.products.id %}" class="btn btn-primary btn-md">view</a></td>
 
